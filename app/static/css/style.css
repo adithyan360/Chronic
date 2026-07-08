@@ -1,0 +1,352 @@
+/* MediTrack Pro Custom Styles */
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.disease-card {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.disease-card:hover {
+    border-color: #007bff;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,123,255,0.1);
+}
+
+.disease-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-header {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 2rem 0 1rem 0;
+}
+
+.section-header h4 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.status-display h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.progress {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.forecast-item {
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.forecast-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.complication-item {
+    background: white;
+    transition: all 0.3s ease;
+    border-left: 4px solid #007bff;
+}
+
+.complication-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.risk-percentage {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.priority-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    height: 100%;
+    border-left: 4px solid;
+}
+
+.priority-section:nth-child(1) {
+    border-left-color: #dc3545;
+}
+
+.priority-section:nth-child(2) {
+    border-left-color: #ffc107;
+}
+
+.priority-section:nth-child(3) {
+    border-left-color: #28a745;
+}
+
+.timeline-visual {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+
+.timeline-event {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+    background: white;
+    border: 2px solid #e9ecef;
+    flex: 1;
+    margin: 0 0.5rem;
+}
+
+.timeline-event.current {
+    border-color: #007bff;
+    background: #e3f2fd;
+}
+
+.timeline-event.projected {
+    border-color: #ffc107;
+    background: #fff8e1;
+}
+
+.timeline-event.forecast {
+    border-color: #dc3545;
+    background: #ffebee;
+}
+
+.timeline-arrow {
+    font-size: 2rem;
+    color: #6c757d;
+    margin: 0 1rem;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-header {
+    border: none;
+    font-weight: 600;
+}
+
+.btn {
+    border-radius: 25px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 0.75rem 1rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.form-range {
+    margin: 1rem 0;
+}
+
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 1rem;
+    }
+    
+    .disease-card {
+        margin-bottom: 1rem;
+    }
+    
+    .timeline-visual {
+        flex-direction: column;
+    }
+    
+    .timeline-arrow {
+        transform: rotate(90deg);
+        margin: 1rem 0;
+    }
+}
+
+/* Health Dashboard Styles */
+.health-card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.health-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.health-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.status-indicator {
+    padding: 0.25rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-indicator.normal {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-indicator.warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-indicator.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.ai-insight-box {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.reminder-item {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid #17a2b8;
+}
+
+.reminder-time {
+    background: #17a2b8;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.quick-action {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.quick-action:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+}
+
+/* Animation for loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Chart containers */
+canvas {
+    max-height: 300px !important;
+}
+
+/* Risk level indicators */
+.risk-low { color: #28a745; }
+.risk-medium { color: #ffc107; }
+.risk-high { color: #dc3545; }
+
+/* Responsive tables */
+.table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+    border-color: #e9ecef;
+}

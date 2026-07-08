@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - MediTrack Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">🏥 MediTrack Pro</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <a class="nav-link" href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Profile Card -->
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <div class="profile-avatar mb-3">
+                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center" 
+                                 style="width: 80px; height: 80px; font-size: 2rem; color: white;">
+                                {{ user_info[0][0].upper() if user_info else 'U' }}
+                            </div>
+                        </div>
+                        <h4>{{ user_info[0] if user_info else 'User' }}</h4>
+                        <p class="text-muted">Patient</p>
+                        <p><small>Member since: {{ user_info[1].split()[0] if user_info and user_info[1] else 'N/A' }}</small></p>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">📊 Quick Stats</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Total Assessments:</span>
+                            <strong>{{ total_predictions }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Average Risk Score:</span>
+                            <strong class="{% if avg_risk < 5 %}text-success{% elif avg_risk < 7 %}text-warning{% else %}text-danger{% endif %}">
+                                {{ "%.1f"|format(avg_risk) }}/10
+                            </strong>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Health Status:</span>
+                            <strong class="{% if avg_risk < 5 %}text-success{% elif avg_risk < 7 %}text-warning{% else %}text-danger{% endif %}">
+                                {% if avg_risk < 5 %}Good{% elif avg_risk < 7 %}Monitor{% else %}Alert{% endif %}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <!-- Disease Assessment History -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">🏥 Disease Assessment History</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if disease_stats %}
+                        <canvas id="diseaseChart" width="400" height="200"></canvas>
+                        <div class="row mt-3">
+                            {% for disease, count in disease_stats %}
+                            <div class="col-md-6 mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>{{ disease }}:</span>
+                                    <strong>{{ count }} assessment{{ 's' if count != 1 else '' }}</strong>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="text-center py-4">
+                            <p class="text-muted">No assessments yet</p>
+                            <a href="/" class="btn btn-primary">Take First Assessment</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Health Goals -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">🎯 Health Goals</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Current Goals</h6>
+                                <ul class="list-unstyled">
+                                    <li>✅ Take medications daily</li>
+                                    <li>✅ Exercise 30 min/day</li>
+                                    <li>⏳ Maintain healthy diet</li>
+                                    <li>⏳ Regular check-ups</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Achievements</h6>
+                                <div class="badge bg-success me-2 mb-2">7 Days Medication Streak</div>
+                                <div class="badge bg-info me-2 mb-2">First Assessment Complete</div>
+                                {% if total_predictions >= 5 %}
+                                <div class="badge bg-warning me-2 mb-2">Health Tracker</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Settings -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">⚙️ Account Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Preferences</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                    <label class="form-check-label" for="emailNotifications">
+                                        Email notifications
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="reminderAlerts" checked>
+                                    <label class="form-check-label" for="reminderAlerts">
+                                        Medication reminders
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Actions</h6>
+                                <button class="btn btn-outline-primary btn-sm me-2">Change Password</button>
+                                <button class="btn btn-outline-secondary btn-sm">Export Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        {% if disease_stats %}
+        // Disease Distribution Chart
+        const ctx = document.getElementById('diseaseChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for disease, count in disease_stats %}'{{ disease }}'{{ ',' if not loop.last }}{% endfor %}],
+                datasets: [{
+                    data: [{% for disease, count in disease_stats %}{{ count }}{{ ',' if not loop.last }}{% endfor %}],
+                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6f42c1']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+        {% endif %}
+    </script>
+</body>
+</html>
